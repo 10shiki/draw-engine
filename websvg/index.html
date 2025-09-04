@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DrawPy SVG Editor (Minimal)</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="toolbar">
+    <div class="group">
+      <button data-tool="select" class="tool active">選択</button>
+      <button data-tool="rect" class="tool">矩形</button>
+      <button data-tool="ellipse" class="tool">楕円</button>
+      <button data-tool="symbol" class="tool">配管</button>
+      <select id="symbol-kind">
+        <option value="pipe">pipe</option>
+        <option value="elbow">elbow</option>
+        <option value="tee">tee</option>
+        <option value="valve">valve</option>
+        <option value="reducer">reducer</option>
+        <option value="flange">flange</option>
+        <option value="instrument">instrument</option>
+      </select>
+      <button data-tool="connector" class="tool">コネクタ</button>
+      <button data-tool="text" class="tool">テキスト</button>
+    </div>
+    <div class="group">
+      <label>塗り <input type="color" id="fill" value="#ffffff"></label>
+      <label>線色 <input type="color" id="stroke" value="#333333"></label>
+      <label>線幅 <input type="number" id="width" value="2" min="1" max="10" style="width:4em"></label>
+    </div>
+    <div class="group">
+      <button id="new-doc">新規</button>
+      <button id="open-json">開く</button>
+      <input type="file" id="file-input" accept="application/json" hidden>
+      <button id="save-json">保存(JSON)</button>
+      <button id="export-svg">SVG書出し</button>
+    </div>
+  </div>
+
+  <div id="stage">
+    <svg id="canvas" tabindex="0">
+      <defs>
+        <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#eee" stroke-width="1"/>
+        </pattern>
+      </defs>
+      <rect x="0" y="0" width="100%" height="100%" fill="url(#grid)"/>
+      <g id="content"></g>
+      <g id="handles"></g>
+      <rect id="marquee" class="marquee" visibility="hidden" />
+    </svg>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
